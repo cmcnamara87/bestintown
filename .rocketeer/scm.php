@@ -10,15 +10,15 @@ return [
 
     // The SSH/HTTPS address to your repository
     // Example: https://github.com/vendor/website.git
-    'repository' => 'https://github.com/cmcnamara87/bad-lobster.git',
+    'repository' => 'https://github.com/cmcnamara87/bestintown.git',
 
     // The repository credentials : you can leave those empty
     // if you're using SSH or if your repository is public
     // In other cases you can leave this empty too, and you will
     // be prompted for the credentials on deploy. If you don't want
     // to be prompted (public repo, etc) set the values to null
-    'username'   => 'cmcnamara87',
-    'password'   => '',
+    'username'   => null,
+    'password'   => null,
 
     // The branch to deploy
     'branch'     => 'master',

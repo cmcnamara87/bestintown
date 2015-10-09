@@ -1,0 +1,15 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Place extends Model
+{
+    protected $fillable = ['name', 'address', 'latitude', 'longitude', 'rating'];
+
+    public function ranks()
+    {
+        return $this->hasMany(Rank::class);
+    }
+}

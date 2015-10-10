@@ -2,7 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Hotspot;
+use App\Jobs\PullFromYelp;
+use App\Place;
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class ClusterPlacesCommand extends Command
 {

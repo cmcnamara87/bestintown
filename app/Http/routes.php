@@ -15,11 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/categories', function() {
+
+
+Route::get('/categories', function () {
     $categories = \App\Category::all();
     return view('categories.index', compact('categories'));
 });
-Route::get('/categories/{categoryId}', function($categoryId) {
+Route::get('/categories/{categoryId}', function ($categoryId) {
     $category = \App\Category::find($categoryId);
     $ranks = \App\Rank::where('category_id', '=', $categoryId)->with('place')->get();
 
@@ -38,7 +40,7 @@ Route::get('/categories/{categoryId}', function($categoryId) {
 
     return view('categories.show', compact('category', 'places'));
 });
-Route::get('/nearby', function() {
+Route::get('/nearby', function () {
     // -27.49611, 153.00207 -> brisbane
     $lat = 48.842147;
     $lon = 2.321984;
@@ -53,11 +55,11 @@ Route::get('/nearby', function() {
     return view('places.index', compact('places'));
 });
 
-Route::group(array('prefix' => 'api/v1'), function() {
-    Route::get('/nearby', function() {
+Route::group(array('prefix' => 'api/v1'), function () {
+    Route::get('/nearby', function () {
         // -27.49611, 153.00207 -> brisbane
-        $lat = \Illuminate\Support\Facades\Input::get('lat');
-        $lon = \Illuminate\Support\Facades\Input::get('lon');
+        $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
+        $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
         $radius = 2;
 
         $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
@@ -65,9 +67,22 @@ Route::group(array('prefix' => 'api/v1'), function() {
             ->orderby('distance', 'asc')
             ->with('ranks', 'ranks.category')
             ->get();
+
         return response()->json($places);
     });
-    Route::get('/categories', function() {
+    Route::get('/hotspots', function() {
+        $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
+        $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
+        $radius = 15;
+
+        $hotspots = \App\Hotspot::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
+            ->having('distance', '<', $radius)
+            ->orderby('distance', 'asc')
+            ->get();
+
+        return response()->json($hotspots);
+    });
+    Route::get('/categories', function () {
         $lat = \Illuminate\Support\Facades\Input::get('lat');
         $lon = \Illuminate\Support\Facades\Input::get('lon');
 
@@ -80,16 +95,16 @@ Route::group(array('prefix' => 'api/v1'), function() {
             ->first();
 
         // get all the categories in the cities
-        $categories = \App\Category::whereHas('ranks', function($query) use ($city) {
+        $categories = \App\Category::whereHas('ranks', function ($query) use ($city) {
             $query->where('city_id', '=', $city->id);
         })->get();
         return response()->json($categories);
     });
-    Route::get('/categories/{categoryId}', function($categoryId) {
+    Route::get('/categories/{categoryId}', function ($categoryId) {
         $category = \App\Category::find($categoryId);
         return response()->json($category);
     });
-    Route::get('/categories/{categoryId}/places', function($categoryId) {
+    Route::get('/categories/{categoryId}/places', function ($categoryId) {
         $lat = \Illuminate\Support\Facades\Input::get('lat');
         $lon = \Illuminate\Support\Facades\Input::get('lon');
 
@@ -103,7 +118,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
         return response()->json($places);
     });
-    Route::get('/yelp', function() {
+    Route::get('/yelp', function () {
         $yelp = new \App\Yelp\Yelp();
         echo "<pre>";
         print_r($yelp->best('pizza', 'Brisbane, Australia'));

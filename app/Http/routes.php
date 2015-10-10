@@ -60,7 +60,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
         // -27.49611, 153.00207 -> brisbane
         $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
         $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
-        $radius = 2;
+        $radius = 1.5;
 
         $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
             ->having('distance', '<', $radius)

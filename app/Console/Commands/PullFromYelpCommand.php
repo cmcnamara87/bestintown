@@ -46,7 +46,7 @@ class PullFromYelpCommand extends Command
 
         Hotspot::truncate();
         $places = Place::all();
-        $clusters = $this->getClusters($places->all(), 2);
+        $clusters = $this->getClusters($places->all(), 1.5);
         $centroids = $this->getCentroids($clusters);
 
         $hotspots = array_map(function($centroid) {

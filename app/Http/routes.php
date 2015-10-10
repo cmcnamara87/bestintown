@@ -82,6 +82,10 @@ Route::group(array('prefix' => 'api/v1'), function () {
 
         return response()->json($hotspots);
     });
+    Route::get('/hotspots/{hotspotId}', function ($hotspotId) {
+        $hotspot = \App\Hotspot::find($hotspotId);
+        return response()->json($hotspot);
+    });
     Route::get('/categories', function () {
         $lat = \Illuminate\Support\Facades\Input::get('lat');
         $lon = \Illuminate\Support\Facades\Input::get('lon');

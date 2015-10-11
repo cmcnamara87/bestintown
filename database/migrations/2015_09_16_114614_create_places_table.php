@@ -16,6 +16,9 @@ class CreatePlacesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address');
+            $table->string('image_url')->nullable();
+            $table->string('external_url');
+            $table->string('description', 500)->nullable();
             $table->double('latitude');
             $table->double('longitude');
             $table->string('rating');

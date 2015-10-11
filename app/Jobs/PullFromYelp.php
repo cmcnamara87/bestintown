@@ -71,6 +71,9 @@ class PullFromYelp extends Job implements SelfHandling
                     if(!$place) {
                         $place = Place::create([
                             'name' => $business->name,
+                            'image_url' => $this->getImageUrl($business),
+                            'external_url' => $business->mobile_url,
+                            'description' => $this->getDescription($business),
                             'rating' => $business->rating,
                             'latitude' => $business->location->coordinate->latitude,
                             'longitude' => $business->location->coordinate->longitude,
@@ -89,6 +92,22 @@ class PullFromYelp extends Job implements SelfHandling
                 sleep(1);
             }
         }
+    }
 
+    function getDescription($business) {
+        if(isset($business->snippet_text)) {
+            return $business->snippet_text;
+        }
+        return null;
+    }
+
+    function getImageUrl($business) {
+        if(isset($business->image_url)) {
+            return $business->image_url;
+        }
+        if(isset($business->snippet_image_url)) {
+            return $business->snippet_image_url;
+        }
+        return null;
     }
 }

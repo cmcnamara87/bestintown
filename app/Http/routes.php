@@ -15,7 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/push', function() {
+    $devices = \App\Device::all();
+    foreach($devices as $device) {
+        \Davibennun\LaravelPushNotification\Facades\PushNotification::app('appNameIOS')
+            ->to($device->token)
+            ->send('Hello World, i`m a push message');
+    }
+    echo 'pushed';
+});
 
 Route::get('/categories', function () {
     $categories = \App\Category::all();
@@ -56,6 +64,17 @@ Route::get('/nearby', function () {
 });
 
 Route::group(array('prefix' => 'api/v1'), function () {
+    Route::post('/devices', function() {
+        // Save the device
+        $data = \Illuminate\Support\Facades\Input::all();
+        $device = \App\Device::firstOrCreate($data);
+        return response()->json($device);
+    });
+
+    Route::get('/devices', function() {
+        $devices = \App\Device::all();
+        return response()->json($devices);
+    });
     Route::get('/nearby', function () {
         // -27.49611, 153.00207 -> brisbane
         $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);

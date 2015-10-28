@@ -1,5 +1,10 @@
 @servers(['web' => 'craig@do'])
 
+@task('tail')
+cd /var/www/html/bestintown.co/current
+tail -f storage/logs/laravel.log
+@endtask
+
 @task('pull')
     cd /var/www/html/bestintown.co/current
     php artisan bestintown:pull

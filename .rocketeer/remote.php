@@ -33,6 +33,7 @@ return [
         'storage/logs',
         'storage/sessions',
         '.env',
+        'app/PushNotifications/ck.pem'
     ],
 
     // Execution

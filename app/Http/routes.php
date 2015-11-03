@@ -79,6 +79,17 @@ Route::group(array('prefix' => 'api/v1'), function () {
         // -27.49611, 153.00207 -> brisbane
         $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
         $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
+
+        // Check if a valid location
+        $radius = 25;
+        $city = \App\City::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
+            ->having('distance', '<', $radius)
+            ->orderby('distance', 'asc')
+            ->first();
+        if(!$city) {
+            abort(400, 'City not supported.');
+        }
+
         $radius = 1.5;
 
         $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
@@ -117,6 +128,10 @@ Route::group(array('prefix' => 'api/v1'), function () {
             ->orderby('distance', 'asc')
             ->first();
 
+        if(!$city) {
+            abort(400, 'City not supported.');
+        }
+
         // get all the categories in the cities
         $categories = \App\Category::whereHas('ranks', function ($query) use ($city) {
             $query->where('city_id', '=', $city->id);
@@ -131,6 +146,16 @@ Route::group(array('prefix' => 'api/v1'), function () {
         $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
         $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
 
+        // Check if a valid location
+        $radius = 25;
+        $city = \App\City::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
+            ->having('distance', '<', $radius)
+            ->orderby('distance', 'asc')
+            ->first();
+        if(!$city) {
+            abort(400, 'City not supported.');
+        }
+        
         $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
             ->orderby('distance', 'asc')
             ->whereHas('ranks', function ($query) use ($categoryId) {

@@ -106,8 +106,8 @@ Route::group(array('prefix' => 'api/v1'), function () {
         return response()->json($hotspot);
     });
     Route::get('/categories', function () {
-        $lat = \Illuminate\Support\Facades\Input::get('lat');
-        $lon = \Illuminate\Support\Facades\Input::get('lon');
+        $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
+        $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
 
         $radius = 50;
 
@@ -128,8 +128,8 @@ Route::group(array('prefix' => 'api/v1'), function () {
         return response()->json($category);
     });
     Route::get('/categories/{categoryId}/places', function ($categoryId) {
-        $lat = \Illuminate\Support\Facades\Input::get('lat');
-        $lon = \Illuminate\Support\Facades\Input::get('lon');
+        $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
+        $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
 
         $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
             ->orderby('distance', 'asc')

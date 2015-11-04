@@ -161,6 +161,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
             ->whereHas('ranks', function ($query) use ($categoryId) {
                 $query->where('category_id', '=', $categoryId);
             })
+            ->where('city_id', '=', $city->id)
             ->with('ranks', 'ranks.category')
             ->get();
 

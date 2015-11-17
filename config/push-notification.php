@@ -3,7 +3,7 @@
 return array(
 
     'appNameIOS'     => array(
-        'environment' => 'development',
+        'environment' => 'production',
         'certificate' => app_path() . '/PushNotifications/ck.pem',
         'passPhrase'  => env('PUSH_APNS_PASSPHRASE'),
         'service'     => 'apns'

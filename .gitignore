@@ -4,3 +4,4 @@ Homestead.yaml
 Homestead.json
 .env
 ck.pem
+ck-production.pem

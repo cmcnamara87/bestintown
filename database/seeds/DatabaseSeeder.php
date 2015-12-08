@@ -21,6 +21,13 @@ class DatabaseSeeder extends Seeder
             'longitude' => 153.02345
         ]);
 
+        \App\City::create([
+            'name' => 'Sydney',
+            'country' => 'Australia',
+            'latitude' => -33.86749,
+            'longitude' => 151.20699
+        ]);
+
         // $this->call(UserTableSeeder::class);
 
         Model::reguard();

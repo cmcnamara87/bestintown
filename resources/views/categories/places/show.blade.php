@@ -65,7 +65,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6" style="position:relative;">
                 <!-- Place -->
                 <div>
                     <h2>
@@ -95,6 +95,40 @@
                         @endforeach
                     </ul>
                     <!-- /Ranks -->
+                    <style>
+                        #map {
+                            height: 400px;
+                            width: 100%;
+                        }
+                    </style>
+
+
+                    <!-- Map -->
+                    <div id="map"></div>
+                    <!-- /Map -->
+
+                    <script>
+                        var map;
+                        function initMap() {
+                            var myLatLng = {lat: {{ $place->latitude }}, lng: {{ $place->longitude }} };
+
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 13,
+                                center: myLatLng
+                            });
+
+                            var marker = new google.maps.Marker({
+                                position: myLatLng,
+                                map: map,
+                                title: '{{ $place->name }}'
+                            });
+                        }
+//                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GEO_API_KEY') }}&signed_in=true&callback=initMap"
+                            async
+                            defer>
+                    </script>
+
                 </div>
                 <!-- /Place -->
 

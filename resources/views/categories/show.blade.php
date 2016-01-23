@@ -1,7 +1,4 @@
 <div>
-    <a href="{{ URL::to('cities') }}">Change Cities</a>
-</div>
-<div>
     <a href="{{ URL::to('cities/' . $city->id) }}">Back to {{ $city->name }} {{ $city->country }}</a>
 </div>
 <h1>Best {{ $category->name }} in {{ $city->name }} {{ $city->country }}</h1>

@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'CitiesController@index');
+Route::resource('cities', 'CitiesController', ["only" => ["index", "show"]]);
+Route::resource('cities.categories', 'CitiesCategoriesController', ["only" => ["show"]]);
+
+//Route::get('/', function () {
+//    $cities = \App\City::all();
+//    return view('cities.index', compact('cities'));
+//});
 
 Route::get('/push', function() {
     $devices = \App\Device::all();

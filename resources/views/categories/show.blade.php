@@ -1,28 +1,44 @@
 <div>
-    <a href="/categories">Back to categories</a>
+    <a href="{{ URL::to('cities') }}">Change Cities</a>
 </div>
-<h1>{{ $category->name }}</h1>
+<div>
+    <a href="{{ URL::to('cities/' . $city->id) }}">Back to {{ $city->name }} {{ $city->country }}</a>
+</div>
+<h1>Best {{ $category->name }} in {{ $city->name }} {{ $city->country }}</h1>
 
 <ul>
-    @foreach ($places as $place)
+    @foreach ($ranks as $rank)
         <li>
-            <h2>{{ $place->name }} {{ $place->distance }} KM</h2>
-            <ul>
-                @foreach ($place->ranks as $rank)
-                    <li>
-                        <a href="/categories/{{ $rank->category->id }}">
-                            <strong>{{ $rank->category->name }} #{{ $rank->rank }}</strong>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-            <p></p>
+            {{ $rank->rank }}
 
+            <!-- Place -->
+            <div>
+                <h2>
+                    <img src="{{ $rank->place->image_url }}" alt="Best food at {{ $rank->place->name }} in {{ $city->name }} {{ $city->country }}"/>
 
-            <p>
-                {{ $place->rating }}/5
-            </p>
-            <p><a target="_blank" href="http://google.com/maps?q={{ $place->address }}">{{ $place->address }}</a></p>
+                    <a target="_blank" href="{{ $rank->place->external_url }}">{{ $rank->place->name }}</a>
+                </h2>
+
+                <!-- address -->
+                <div>
+                    {{ $rank->place->address }}
+                </div>
+                <!-- /address -->
+
+                {{ $rank->place->description }}
+
+                <!-- Ranks -->
+                <ul>
+                    @foreach($rank->place->ranks as $placeRank)
+                        <li>
+                            {{ $placeRank->rank }} {{ $placeRank->category->name }}
+                        </li>
+                    @endforeach
+                </ul>
+                <!-- /Ranks -->
+            </div>
+            <!-- /Place -->
+
         </li>
     @endforeach
 </ul>

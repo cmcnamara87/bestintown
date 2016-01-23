@@ -2,12 +2,18 @@
 {{--@section('title', $cinema->location . ' - What\'s Good at the Movies - MoviesOwl')--}}
 @section('content')
 
-    <div class="container-fluid">
-        <h1 class="text-center" style="margin-bottom: 20px;">Best {{ $category->name }}
+
+    <div class="jumbotron">
+        <h1 class="text-center">Best {{ $category->name }}
             in {{ $city->name }} {{ $city->country }}</h1>
+        {{--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>--}}
+    </div>
+
+    <div class="container-fluid">
+
 
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-2" style="border-right: 1px solid #eee;">
                 <h4>{{ $city->name }}, {{ $city->country }}</h4>
                 <ul>
                     @foreach ($categories as $leftCategory)
@@ -17,10 +23,13 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="border-right: 1px solid #eee;">
                 <ul class="list-unstyled">
                     @foreach ($ranks as $rank)
-                        <li>
+                        <li @if($rank->place->id == $place->id)
+                            style="background-color: #eee"
+                            @endif
+ >
                             <div class="media">
                                 <div class="pull-left" style="font-size:50px;">
                                     {{ $rank->rank }}
@@ -110,18 +119,25 @@
                     <script>
                         var map;
                         function initMap() {
-                            var myLatLng = {lat: {{ $place->latitude }}, lng: {{ $place->longitude }} };
 
+                            var myLatLng = {lat: {{ $place->latitude }}, lng: {{ $place->longitude }} };
                             var map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 13,
                                 center: myLatLng
                             });
 
+                            @foreach($ranks as $rank)
+                            var place{{ $rank->rank }} = {lat: {{ $rank->place->latitude }}, lng: {{ $rank->place->longitude }} };
+
                             var marker = new google.maps.Marker({
-                                position: myLatLng,
+                                position: place{{ $rank->rank }},
                                 map: map,
-                                title: '{{ $place->name }}'
+                                title: '{{ $rank->place->name }}'
                             });
+                            @if($rank->place->id == $place->id)
+                            marker.setIcon('http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple.png');
+                            @endif
+                            @endforeach
                         }
 //                    </script>
                     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GEO_API_KEY') }}&signed_in=true&callback=initMap"

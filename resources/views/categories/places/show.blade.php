@@ -3,7 +3,8 @@
 @section('content')
 
     <div class="container-fluid">
-        <h1 class="text-center" style="margin-bottom: 20px;">Best {{ $category->name }} in {{ $city->name }} {{ $city->country }}</h1>
+        <h1 class="text-center" style="margin-bottom: 20px;">Best {{ $category->name }}
+            in {{ $city->name }} {{ $city->country }}</h1>
 
         <div class="row">
             <div class="col-sm-2">
@@ -60,13 +61,43 @@
                             </div>
 
 
-
-
                         </li>
                     @endforeach
                 </ul>
             </div>
             <div class="col-sm-6">
+                <!-- Place -->
+                <div>
+                    <h2>
+                        <a target="_blank"
+                           href="{{ $place->external_url  }}">
+                            {{ $place->name }}
+                        </a>
+                    </h2>
+
+                    <!-- address -->
+                    <div>
+                        {{ $place->address }}
+                    </div>
+                    <!-- /address -->
+
+                    {{ $place->description }}
+
+                    <!-- Ranks -->
+                    <ul>
+                        @foreach($place->ranks as $placeRank)
+                            <li>
+                            <span class="label label-info" style="font-size: 14px;">
+                            #{{ $placeRank->rank }} {{ $placeRank->category->name }}
+                            </span>
+
+                            </li>
+                        @endforeach
+                    </ul>
+                    <!-- /Ranks -->
+                </div>
+                <!-- /Place -->
+
             </div>
         </div>
     </div>

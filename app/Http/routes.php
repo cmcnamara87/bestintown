@@ -14,6 +14,7 @@
 Route::get('/', 'CitiesController@index');
 Route::resource('cities', 'CitiesController', ["only" => ["index", "show"]]);
 Route::resource('cities.categories', 'CitiesCategoriesController', ["only" => ["show"]]);
+Route::resource('cities.categories.places', 'CitiesCategoriesPlacesController', ["only" => ["show"]]);
 
 //Route::get('/', function () {
 //    $cities = \App\City::all();

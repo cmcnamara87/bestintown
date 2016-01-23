@@ -2,8 +2,12 @@
 {{--@section('title', $cinema->location . ' - What\'s Good at the Movies - MoviesOwl')--}}
 @section('content')
 
+    <div class="jumbotron">
+        <h1 class="text-center">Best {{ $category->name }}
+            in {{ $city->name }} {{ $city->country }}</h1>
+    </div>
+    
     <div class="container-fluid">
-        <h1 class="text-center" style="margin-bottom: 20px;">Best {{ $category->name }} in {{ $city->name }} {{ $city->country }}</h1>
 
         <div class="row">
             <div class="col-sm-2">

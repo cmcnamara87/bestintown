@@ -6,7 +6,6 @@
     <div class="jumbotron">
         <h1 class="text-center">Best {{ $category->name }}
             in {{ $city->name }} {{ $city->country }}</h1>
-        {{--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>--}}
     </div>
 
     <div class="container-fluid">

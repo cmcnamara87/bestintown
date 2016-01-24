@@ -6,7 +6,7 @@
         <h1 class="text-center">Best {{ $category->name }}
             in {{ $city->name }} {{ $city->country }}</h1>
     </div>
-    
+
     <div class="container-fluid">
 
         <div class="row">

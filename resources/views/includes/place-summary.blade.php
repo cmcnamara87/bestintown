@@ -1,24 +1,25 @@
 <!-- Place -->
 <div>
-    <h2>
+    <!-- Stars -->
+    <div style="margin-right: 20px;" class="pull-right">
+        @for($i = 0; $i < floor($place->rating); $i++)
+            <i class="fa fa fa-star"></i>
+        @endfor
+        @if($place->rating * 2 % 2 == 1)
+            <i class="fa fa fa-star-half-o"></i>
+        @endif
+        @for($i = 0; $i < 5 - ceil($place->rating); $i++)
+            <i class="fa fa fa-star-o"></i>
+        @endfor
+    </div>
+    <h2 style="margin:0;">
         <a
                 href="{{ URL::to('cities/' . $city->id . '/categories/' . $category->id . '/places/' . $place->id ) }}">
             {{ $place->name }}
         </a>
     </h2>
 
-    <!-- Stars -->
-    <div style="margin-bottom: 20px;">
-        @for($i = 0; $i < floor($place->rating); $i++)
-            <i class="fa fa fa-star"></i>
-        @endfor
-        @if($place->rating * 2 % 2 == 1)
-                <i class="fa fa fa-star-half-o"></i>
-        @endif
-        @for($i = 0; $i < 5 - ceil($place->rating); $i++)
-            <i class="fa fa fa-star-o"></i>
-        @endfor
-    </div>
+
     <!-- /Stars -->
 
     <!-- Ranks -->

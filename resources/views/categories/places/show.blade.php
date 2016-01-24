@@ -16,26 +16,7 @@
                 @include('includes.category-list', ['city' => $city, 'categories' => $categories])
             </div>
             <div class="col-sm-4" style="border-right: 1px solid #eee;">
-                <ul class="list-unstyled">
-                    @foreach ($ranks as $rank)
-                        <li @if($rank->place->id == $place->id)
-                            style="background-color: #eee"
-                            @endif
-                        >
-
-                            <div class="media">
-                                <div class="pull-left" style="font-size:50px;">
-                                    {{ $rank->rank }}
-                                </div>
-                                <div class="media-body">
-                                    @include('includes.place-summary', ['place' => $rank->place])
-                                </div>
-                            </div>
-
-
-                        </li>
-                    @endforeach
-                </ul>
+                @include('includes.rank-list')
             </div>
             <div class="col-sm-6" style="position:relative;">
                 @include('includes.place-full', ['place' => $place])

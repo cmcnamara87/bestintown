@@ -1,31 +1,23 @@
 <!-- Place -->
 <div>
-    <h2>
-        <a target="_blank"
-           href="{{ $place->external_url  }}">
-            {{ $place->name }}
-        </a>
-    </h2>
-
-    <!-- address -->
-    <div>
-        {{ $place->address }}
+    <div style="margin-bottom: 40px;">
+        @include('includes.place-summary')
     </div>
-    <!-- /address -->
 
-    {{ $place->description }}
+    <div style="margin-bottom: 40px;">
+        <img style="width:200px;height:200px;"
+             src="https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.2885-15/e15/12558693_179183985772025_2119645602_n.jpg"
+             alt=""/>
 
-    <!-- Ranks -->
-    <ul>
-        @foreach($place->ranks as $placeRank)
-            <li>
-                            <span class="label label-info" style="font-size: 14px;">
-                            #{{ $placeRank->rank }} {{ $placeRank->category->name }}
-                            </span>
+        <img style="width:200px;height:200px;"
+             src="https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xfa1/t51.2885-15/e15/12424555_1074134705971579_73871988_n.jpg"
+             alt=""/>
 
-            </li>
-        @endforeach
-    </ul>
+        <img style="width:200px;height:200px;"
+             src="https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xtp1/t51.2885-15/e15/11363716_1687395061498183_510518064_n.jpg"
+             alt=""/>
+
+    </div>
     <!-- /Ranks -->
     @include('includes.place-map', ['place' => $place, 'ranks' => $ranks])
 </div>

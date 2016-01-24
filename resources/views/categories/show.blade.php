@@ -14,24 +14,7 @@
                 @include('includes.category-list', ['city' => $city, 'categories' => $categories, 'category' => $category])
             </div>
             <div class="col-sm-4">
-                <ul class="list-unstyled">
-                    @foreach ($ranks as $rank)
-                        <li>
-                            <div class="media">
-                                <div class="pull-left" style="font-size:50px;">
-                                    {{ $rank->rank }}
-                                </div>
-                                <div class="media-body">
-                                    @include('includes.place-summary', ['place' => $rank->place])
-                                </div>
-                            </div>
-
-
-
-
-                        </li>
-                    @endforeach
-                </ul>
+                @include('includes.rank-list')
             </div>
             <div class="col-sm-6">
                 @include('includes.place-map', ['ranks' => $ranks])

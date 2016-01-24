@@ -8,7 +8,7 @@
     </h2>
 
     <!-- Stars -->
-    <div>
+    <div style="margin-bottom: 20px;">
         @for($i = 0; $i < floor($place->rating); $i++)
             <i class="fa fa fa-star"></i>
         @endfor
@@ -22,7 +22,7 @@
     <!-- /Stars -->
 
     <!-- Ranks -->
-    <ul class="list-inline">
+    <ul class="list-inline" style="margin-bottom: 20px;">
         @foreach($place->ranks as $placeRank)
             <li>
                 @include('includes.category-rank', ["rank" => $placeRank, "place" => $place])
@@ -33,11 +33,21 @@
 
 
     <!-- address -->
-    <div>
-        {{ $place->address }}
+    <div class="text-capitalize text-muted" style="margin-bottom: 20px;">
+        <small>{{ $place->address }}</small>
     </div>
     <!-- /address -->
 
-    {{ $place->description }}
+    <div class="media">
+        <div class="pull-left">
+            <div style="width:40px;height:40px;background-color:#eee;border-radius:40px;text-align:center;line-height:40px;" class="text-muted">
+                <i class="fa fa-user"></i>
+            </div>
+        </div>
+        <div class="media-body">
+            {{ $place->description }}
+        </div>
+    </div>
+    
 </div>
 <!-- /Place -->

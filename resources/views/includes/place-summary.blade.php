@@ -40,11 +40,12 @@
 
     <div class="media">
         <div class="pull-left">
-            <div style="width:40px;height:40px;background-color:#eee;border-radius:40px;text-align:center;line-height:40px;" class="text-muted">
+            <div style="width:40px;height:40px;background-color:#ddd;border-radius:40px;text-align:center;line-height:40px;" class="text-muted">
                 <i class="fa fa-user"></i>
             </div>
         </div>
         <div class="media-body">
+            <h5>John Smith</h5>
             {{ $place->description }}
         </div>
     </div>

@@ -3,3 +3,7 @@ $navbar-margin-bottom: 0;
 $jumbotron-heading-font-size:    50px;
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+#map {
+  height: 400px;
+  width: 100%;
+}

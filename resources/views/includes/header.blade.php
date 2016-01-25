@@ -9,7 +9,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ URL::to('cities/' . $city->id) }}">Best In Town</a>
+            <a class="navbar-brand" href="{{ URL::to('cities/' . $city->id) }}">
+                <i class="fa fa-home"></i> Best In Town</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

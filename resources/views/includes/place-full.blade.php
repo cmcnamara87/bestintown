@@ -1,6 +1,7 @@
 <!-- Place -->
-<div>
+<div style="padding:20px;">
     <div style="margin-bottom: 40px;">
+        {{--<h2 class="pull-left" style="margin-right: 20px;">3</h2>--}}
         @include('includes.place-summary')
     </div>
 

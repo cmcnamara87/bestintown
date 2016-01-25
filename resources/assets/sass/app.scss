@@ -1,9 +1,12 @@
 $green: rgba(119, 180, 32, 1);
-$grey: rgba(34, 41, 49, 1);
-$blue: rgba(0, 137, 209, 1);
+$grey: rgba(86, 94, 104, 1);
+$blue: rgba(0, 135, 191, 1);
+
+
 
 // navbar
-$navbar-default-bg: $grey;
+$navbar-height: 30px !default;
+$navbar-default-bg: darken($grey, 20%);
 $navbar-default-color: white;
 $navbar-default-brand-color: white;
 $navbar-margin-bottom: 0;
@@ -11,7 +14,7 @@ $navbar-border-radius: 0px;
 
 // jumbotron
 $jumbotron-padding: 10px;
-$jumbotron-heading-font-size:    40px;
+$jumbotron-heading-font-size:    30px;
 $jumbotron-bg: $blue;
 $jumbotron-color: white;
 //$jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
@@ -25,3 +28,72 @@ $font-size-base: 16px;
   height: 400px;
   width: 100%;
 }
+
+.navbar {
+  .navbar-brand {
+    font-size: inherit;
+    font-weight: bold;
+  }
+  font-size: 14px;
+}
+.jumbotron {
+  h1 {
+    margin: 10px;
+  }
+}
+
+.categories-list {
+  .categories-list-item {
+    a {
+      padding: 5px 0;
+      font-size:14px;
+      color: lighten($grey, 10%);
+      display: block;
+    }
+    .badge {
+      color: lighten($grey, 40%);
+      font-weight: normal;
+      border:1px solid lighten($grey, 50%);;
+      background-color:white;
+      font-size: 12px;
+    }
+
+    &.active {
+      a {
+        color: $blue;
+      }
+      .badge {
+        background-color: lighten($blue, 10%);
+        color: white;
+        border: none;
+      }
+    }
+  }
+}
+
+//.rank-list-item {
+//  position: relative;
+//  border: none;
+//  transition: transform .2s ease-in-out;
+//  cursor: pointer;
+//
+//  &:after {
+//    content: '';
+//    top: 0px;
+//    left: -10px;
+//    right: 0;
+//    bottom: 0;
+//    position: absolute;
+//    z-index: 1;
+//    opacity: 0;
+////    border: 1px solid red;
+//    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+//    transition: opacity 0.2s ease-in-out;
+//  }
+//  &:hover {
+//    transform: scale(1.03);
+//    &:after {
+//      opacity: 1;
+//    }
+//  }
+//}

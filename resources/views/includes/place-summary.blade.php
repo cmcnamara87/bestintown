@@ -12,12 +12,12 @@
             <i class="fa fa fa-star-o"></i>
         @endfor
     </div>
-    <h2 style="margin:0;">
+    <h4 style="margin:0;">
         <a
                 href="{{ URL::to('cities/' . $city->id . '/categories/' . $category->id . '/places/' . $place->id ) }}">
             {{ $place->name }}
         </a>
-    </h2>
+    </h4>
 
 
     <!-- /Stars -->
@@ -40,16 +40,16 @@
     <!-- /address -->
 
     <div class="media">
-        <div class="pull-left">
-            <div style="width:40px;height:40px;background-color:#ddd;border-radius:40px;text-align:center;line-height:40px;" class="text-muted">
-                <i class="fa fa-user"></i>
-            </div>
-        </div>
+        {{--<div class="pull-left">--}}
+            {{--<div style="width:40px;height:40px;background-color:#ddd;border-radius:40px;text-align:center;line-height:40px;" class="text-muted">--}}
+                {{--<i class="fa fa-user"></i>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="media-body">
-            <h5>John Smith</h5>
-            {{ $place->description }}
+            {{--<h5>John Smith</h5>--}}
+            {{  str_limit($place->description, 90, '...')  }}
         </div>
     </div>
-    
+
 </div>
 <!-- /Place -->

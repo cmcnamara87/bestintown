@@ -5237,7 +5237,7 @@ tbody.collapse.in {
 
 .navbar {
   position: relative;
-  min-height: 50px;
+  min-height: 30px;
   margin-bottom: 0;
   border: 1px solid transparent;
 }
@@ -5392,10 +5392,10 @@ tbody.collapse.in {
 
 .navbar-brand {
   float: left;
-  padding: 14px 15px;
+  padding: 4px 15px;
   font-size: 20px;
   line-height: 22px;
-  height: 50px;
+  height: 30px;
 }
 
 .navbar-brand:hover,
@@ -5419,8 +5419,8 @@ tbody.collapse.in {
   float: right;
   margin-right: 15px;
   padding: 9px 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: -2px;
+  margin-bottom: -2px;
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
@@ -5449,7 +5449,7 @@ tbody.collapse.in {
 }
 
 .navbar-nav {
-  margin: 7px -15px;
+  margin: 2px -15px;
 }
 
 .navbar-nav > li > a {
@@ -5495,8 +5495,8 @@ tbody.collapse.in {
   }
 
   .navbar-nav > li > a {
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 
@@ -5507,8 +5507,8 @@ tbody.collapse.in {
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-top: -3px;
+  margin-bottom: -3px;
 }
 
 @media (min-width: 768px) {
@@ -5609,25 +5609,25 @@ tbody.collapse.in {
 }
 
 .navbar-btn {
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-top: -3px;
+  margin-bottom: -3px;
 }
 
 .navbar-btn.btn-sm,
 .btn-group-sm > .navbar-btn.btn {
-  margin-top: 8.5px;
-  margin-bottom: 8.5px;
+  margin-top: -1.5px;
+  margin-bottom: -1.5px;
 }
 
 .navbar-btn.btn-xs,
 .btn-group-xs > .navbar-btn.btn {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .navbar-text {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 @media (min-width: 768px) {
@@ -5654,8 +5654,8 @@ tbody.collapse.in {
 }
 
 .navbar-default {
-  background-color: #222931;
-  border-color: #14191d;
+  background-color: #282c30;
+  border-color: #191b1e;
 }
 
 .navbar-default .navbar-brand {
@@ -5686,7 +5686,7 @@ tbody.collapse.in {
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #555;
-  background-color: #14191d;
+  background-color: #191b1e;
 }
 
 .navbar-default .navbar-nav > .disabled > a,
@@ -5711,13 +5711,13 @@ tbody.collapse.in {
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #14191d;
+  border-color: #191b1e;
 }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #14191d;
+  background-color: #191b1e;
   color: #555;
 }
 
@@ -5736,7 +5736,7 @@ tbody.collapse.in {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #555;
-    background-color: #14191d;
+    background-color: #191b1e;
   }
 
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
@@ -6228,7 +6228,7 @@ a.badge:focus {
   padding-bottom: 10px;
   margin-bottom: 10px;
   color: white;
-  background-color: #0089d1;
+  background-color: #0087bf;
 }
 
 .jumbotron h1,
@@ -6243,7 +6243,7 @@ a.badge:focus {
 }
 
 .jumbotron > hr {
-  border-top-color: #00689e;
+  border-top-color: #00638c;
 }
 
 .container .jumbotron,
@@ -6271,7 +6271,7 @@ a.badge:focus {
 
   .jumbotron h1,
   .jumbotron .h1 {
-    font-size: 40px;
+    font-size: 30px;
   }
 }
 
@@ -8303,4 +8303,42 @@ button.close {
 #map {
   height: 400px;
   width: 100%;
+}
+
+.navbar {
+  font-size: 14px;
+}
+
+.navbar .navbar-brand {
+  font-size: inherit;
+  font-weight: bold;
+}
+
+.jumbotron h1 {
+  margin: 10px;
+}
+
+.categories-list .categories-list-item a {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #6d7784;
+  display: block;
+}
+
+.categories-list .categories-list-item .badge {
+  color: #c0c4ca;
+  font-weight: normal;
+  border: 1px solid #dbdee2;
+  background-color: white;
+  font-size: 12px;
+}
+
+.categories-list .categories-list-item.active a {
+  color: #0087bf;
+}
+
+.categories-list .categories-list-item.active .badge {
+  background-color: #00abf2;
+  color: white;
+  border: none;
 }

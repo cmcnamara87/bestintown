@@ -39,7 +39,7 @@
                         </div>
                         <div class="media-body">
                             <h5 style="margin-top:0;">Anonymous User</h5>
-                            {{  $place->description  }} <a href="{{ $place->external_url }}">read more on Yelp</a>
+                            {{  $place->description  }} <a href="{{ $place->external_url }}" target="_blank">read more on Yelp</a>
                         </div>
                     </div>
                 </div>

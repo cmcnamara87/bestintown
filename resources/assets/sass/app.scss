@@ -2,7 +2,7 @@ $green: rgba(119, 180, 32, 1);
 $grey: rgba(86, 94, 104, 1);
 $blue: rgba(0, 135, 191, 1);
 $yellow: rgba(255, 219, 0, 1);
-$gray-base: $grey;
+$gray-base: darken($grey, 10%);
 $gray-light: lighten($gray-base, 30%);
 
 // navbar
@@ -84,6 +84,7 @@ $font-size-base: 14px;
   margin-bottom: 20px;
   display: table;;
   border-top: 10px solid desaturate(lighten($blue, 50%), 80%);
+  width: 100%;
   //  border: 1px solid desaturate(lighten($blue, 45%), 80%);
 
   .rank-list-item__title {

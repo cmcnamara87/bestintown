@@ -38,6 +38,8 @@
                             </div>
                         </div>
                         <div class="media-body">
+                            <img src="{{ $place->image_url }}" alt="" class="pull-right" style="margin-left:15px;width:80px;"/>
+
                             <h5 style="margin-top:0;">Anonymous User</h5>
                             {{  $place->description  }} <a href="{{ $place->external_url }}" target="_blank">read more on Yelp</a>
                         </div>

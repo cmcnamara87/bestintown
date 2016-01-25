@@ -18,8 +18,7 @@
         </a>
     </h4>
 
-
-    <!-- /Stars -->
+    <img src="{{ $place->image_url }}" alt="" class="pull-right" style="margin-left:15px;width:80px;margin-top:5px;margin-bottom:15px;"/>
 
     <!-- address -->
     <div class="rank-list-item__address">

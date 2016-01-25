@@ -1,7 +1,7 @@
-<ul class="list-unstyled">
+<ul class="list-unstyled" style="background-color: #eee;padding: 20px;margin: -10px -15px">
     @foreach ($ranks as $rank)
-        <li style="padding:20px;@if(isset($place) && $rank->place->id == $place->id)
-            background-color: #eee
+        <li style="background-color:white;margin-bottom:20px;padding:20px;@if(isset($place) && $rank->place->id == $place->id)
+            border-top: 10px solid yellow
                 @endif
                 ">
 

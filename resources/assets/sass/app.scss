@@ -1,6 +1,24 @@
-$jumbotron-padding: 10px;
+$green: rgba(119, 180, 32, 1);
+$grey: rgba(34, 41, 49, 1);
+$blue: rgba(0, 137, 209, 1);
+
+// navbar
+$navbar-default-bg: $grey;
+$navbar-default-color: white;
+$navbar-default-brand-color: white;
 $navbar-margin-bottom: 0;
-$jumbotron-heading-font-size:    50px;
+$navbar-border-radius: 0px;
+
+// jumbotron
+$jumbotron-padding: 10px;
+$jumbotron-heading-font-size:    40px;
+$jumbotron-bg: $blue;
+$jumbotron-color: white;
+//$jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
+//$jumbotron-heading-font-size:    ceil(($font-size-base * 4.5)) !default;
+
+$font-size-base: 16px;
+
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 #map {

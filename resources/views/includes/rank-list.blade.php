@@ -1,23 +1,12 @@
-<ul class="list-unstyled" style="background-color: #eee;padding: 20px;margin: -10px -15px">
+<ul class="list-unstyled rank-list">
     @foreach ($ranks as $rank)
-        <li class="rank-list-item"
-            style="background-color:white;margin-bottom:20px;padding:20px;@if(isset($place) && $rank->place->id == $place->id)
-            border-left: 10px solid rgba(255, 219, 0, 1)
-                @else
-                border-left: 10px solid #bbb;
-                @endif
-                ">
-
-            <div class="media">
-                <div class="pull-left" style="font-size:50px;">
-                    {{ $rank->rank }}
-                </div>
-                <div class="media-body">
-                    @include('includes.place-summary', ['place' => $rank->place])
-                </div>
+        <li class="rank-list-item">
+            <div class="rank-list-item__rank @if(isset($place) && $rank->place->id == $place->id) active @endif">
+                #{{ $rank->rank }}
             </div>
-
-
+            <div class="rank-list-item__place">
+                @include('includes.place-summary', ['place' => $rank->place])
+            </div>
         </li>
     @endforeach
 </ul>

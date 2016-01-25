@@ -12,7 +12,7 @@
             <i class="fa fa fa-star-o"></i>
         @endfor
     </div>
-    <h4 style="margin:0;">
+    <h4 style="margin:0;margin-bottom: 10px;">
         <a
                 href="{{ URL::to('cities/' . $city->id . '/categories/' . $category->id . '/places/' . $place->id ) }}">
             {{ $place->name }}
@@ -22,24 +22,13 @@
 
     <!-- /Stars -->
 
-    <!-- Ranks -->
-    <ul class="list-inline" style="margin-bottom: 20px;">
-        @foreach($place->ranks as $placeRank)
-            <li>
-                @include('includes.category-rank', ["rank" => $placeRank, "place" => $place])
-            </li>
-        @endforeach
-    </ul>
-    <!-- /Ranks -->
-
-
     <!-- address -->
-    <div class="text-capitalize text-muted" style="margin-bottom: 20px;">
+    <div class="text-capitalize text-muted" style="margin-bottom: 10px;">
         <small>{{ $place->address }}</small>
     </div>
     <!-- /address -->
 
-    <div class="media">
+    <div class="media" style="margin-bottom: 10px;">
         {{--<div class="pull-left">--}}
             {{--<div style="width:40px;height:40px;background-color:#ddd;border-radius:40px;text-align:center;line-height:40px;" class="text-muted">--}}
                 {{--<i class="fa fa-user"></i>--}}
@@ -50,6 +39,16 @@
             {{  str_limit($place->description, 90, '...')  }}
         </div>
     </div>
+
+    <!-- Ranks -->
+    <ul class="list-inline">
+        @foreach($place->ranks as $placeRank)
+            <li>
+                @include('includes.category-rank', ["rank" => $placeRank, "place" => $place])
+            </li>
+        @endforeach
+    </ul>
+    <!-- /Ranks -->
 
 </div>
 <!-- /Place -->

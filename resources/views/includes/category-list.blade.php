@@ -1,5 +1,6 @@
-<h4 class="text-muted text-uppercase" style="font-size: 12px;padding-right: 10px;"
-        >Best Restaurants in {{ $city->name }} </h4>
+<h4 class="text-muted text-uppercase">
+    <small>Best Restaurants in {{ $city->name }}</small>
+</h4>
 <ul class="list-unstyled categories-list">
 
     <!-- Selected category at the top -->

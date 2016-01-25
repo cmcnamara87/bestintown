@@ -2,6 +2,8 @@ $green: rgba(119, 180, 32, 1);
 $grey: rgba(86, 94, 104, 1);
 $blue: rgba(0, 135, 191, 1);
 $yellow: rgba(255, 219, 0, 1);
+$gray-base: $grey;
+$gray-light: lighten($gray-base, 30%);
 
 // navbar
 $navbar-height: 30px !default;
@@ -47,7 +49,7 @@ $font-size-base: 14px;
     a {
       padding: 5px 0;
       font-size: 14px;
-      color: lighten($grey, 10%);
+      color: $text-color;
       display: block;
     }
     .badge {
@@ -81,34 +83,41 @@ $font-size-base: 14px;
   background-color: white;
   margin-bottom: 20px;
   display: table;;
-//  border: 1px solid desaturate(lighten($blue, 45%), 80%);
+  border-top: 10px solid desaturate(lighten($blue, 50%), 80%);
+  //  border: 1px solid desaturate(lighten($blue, 45%), 80%);
 
-  h2, h3, h4 {
-    a {color: $grey; }
+  .rank-list-item__title {
+    display: block;
+    color: $gray-darker;
+    margin: 0 0 10px 0;
+    a {
+      color: inherit;
+    }
   }
-
   .rank-list-item__rank {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    padding: 0 10px ;
-//    background-color:
+    padding-left: 20px;
+    font-weight: bold;
     background-color: white;
-    border-right: 1px solid desaturate(lighten($blue, 55%), 80%);
     color: lighten($grey, 20%);
     font-size: 20px;
-    border-left: 10px solid lighten($grey, 20%);
-
-    &.active {
-      border-left: 10px solid $yellow;
-//      color: $grey;
-//      border-right: 1px solid darken($yellow, 3%);
-    }
   }
   .rank-list-item__place {
     display: table-cell;
     padding: 20px;
   }
+  .rank-list-item__address {
+    @extend .text-muted;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+
+  &.active {
+    border-top: 10px solid $yellow;
+  }
+
 }
 
 //  position: relative;
@@ -136,7 +145,6 @@ $font-size-base: 14px;
 //    }
 //  }
 //}
-
 
 .category-rank {
   @extend .label, .label-info;

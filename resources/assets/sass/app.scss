@@ -85,6 +85,11 @@ $font-size-base: 14px;
   display: table;;
   border-top: 10px solid desaturate(lighten($blue, 50%), 80%);
   width: 100%;
+  &:hover {
+    .rank-list-item__title a {
+      text-decoration: underline;
+    }
+  }
   //  border: 1px solid desaturate(lighten($blue, 45%), 80%);
 
   .rank-list-item__title {

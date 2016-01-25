@@ -8367,6 +8367,10 @@ button.close {
   width: 100%;
 }
 
+.rank-list-item:hover .rank-list-item__title a {
+  text-decoration: underline;
+}
+
 .rank-list-item .rank-list-item__title {
   display: block;
   color: #5e6772;

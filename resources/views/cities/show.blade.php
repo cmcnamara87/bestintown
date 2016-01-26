@@ -15,7 +15,7 @@
             </div>
             <div class="col-sm-4">
                 <p class="text-muted">
-                    <i class="fa fa-arrow-right"></i> Select a Category
+                    <i class="fa fa-arrow-left"></i> Select a Category
                 </p>
             </div>
         </div>

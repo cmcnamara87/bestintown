@@ -1,5 +1,5 @@
 @extends('layouts.default')
-{{--@section('title', $cinema->location . ' - What\'s Good at the Movies - MoviesOwl')--}}
+@section('title', "Best {$category->name} in {$city->name}")
 @section('content')
 
     <div class="jumbotron">

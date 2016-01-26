@@ -1,12 +1,24 @@
-<div>
-    <a href="{{ URL::to('cities') }}">Change Cities</a>
-</div>
+@extends('layouts.default')
+@section('title', "Best Places in {$city->name}")
+@section('content')
 
-<div>
-    <h1>Best Food in {{ $city->name }} {{ $city->country }}</h1>
-    <ul>
-        @foreach($categories as $category)
-            <li><a href="{{ URL::to('cities/' . $city->id . '/categories/' . $category->id) }}">{{ $category->name }}</a></li>
-        @endforeach
-    </ul>
-</div>
+    <div class="jumbotron">
+        <h1 class="text-center">Best Places
+            in {{ $city->name }}</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-2">
+                @include('includes.category-list', ['city' => $city, 'categories' => $categories, 'category' => $category])
+            </div>
+            <div class="col-sm-4">
+                <p class="text-muted">
+                    <i class="fa fa-arrow-right"></i> Select a Category
+                </p>
+            </div>
+        </div>
+    </div>
+
+@stop

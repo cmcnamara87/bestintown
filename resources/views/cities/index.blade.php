@@ -1,5 +1,16 @@
-<ul>
-    @foreach($cities as $city)
-        <li><a href="{{ URL::to('cities/' . $city->id) }}">{{ $city->name }} {{ $city->country }}</a></li>
-    @endforeach
-</ul>
+@extends('layouts.default')
+@section('title', "The Best Places in your City")
+@section('content')
+
+    <div class="jumbotron">
+        <h1 class="text-center">The Best Places in Your City</h1>
+    </div>
+
+    <div class="container-fluid">
+        @foreach($cities as $city)
+            <li><a href="{{ URL::to('cities/' . $city->id) }}">{{ $city->name }} {{ $city->country }}</a></li>
+        @endforeach
+    </div>
+
+@stop
+

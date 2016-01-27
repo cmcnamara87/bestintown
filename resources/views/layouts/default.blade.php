@@ -15,6 +15,6 @@
         @include('includes.footer')
     </footer>
 </div>
-{{--@include('includes.analyticstracking')--}}
+@include('includes.analyticstracking')
 </body>
 </html>

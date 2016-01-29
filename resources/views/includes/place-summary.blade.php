@@ -13,7 +13,7 @@
         @endfor
     </div>
     <h4 class="rank-list-item__title">
-        <a href="{{ URL::to('cities/' . $city->id . '/categories/' . $category->id . '/places/' . $place->id ) }}">
+        <a href="{{ url("{$city->slug}/{$category->slug}/{$place->slug}") }}">
             {{ $place->name }}
         </a>
     </h4>

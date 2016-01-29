@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Category;
+use App\City;
+use App\Place;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -27,6 +30,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot($router);
+        $router->model('cities', City::class);
+        $router->model('places', Place::class);
+        $router->model('categories', Category::class);
+
     }
 
     /**

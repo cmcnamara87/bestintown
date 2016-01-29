@@ -11,15 +11,11 @@
 |
 */
 
-
+Route::get('/', 'CitiesController@index');
 Route::resource('cities', 'CitiesController', ["only" => ["index", "show"]]);
 Route::resource('cities.categories', 'CitiesCategoriesController', ["only" => ["show"]]);
 Route::resource('cities.categories.places', 'CitiesCategoriesPlacesController', ["only" => ["show"]]);
 
-//Route::get('/', function () {
-//    $cities = \App\City::all();
-//    return view('cities.index', compact('cities'));
-//});
 
 Route::get('/push', function() {
     $devices = \App\Device::all();
@@ -182,6 +178,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
 });
 
 
-Route::get('/', 'CitiesController@index');
+// Routes for SEO
+Route::get('/{cities}', 'CitiesController@show');
 Route::get('/{cities}/{categories}', 'CitiesCategoriesController@show');
 Route::get('/{cities}/{categories}/{places}', 'CitiesCategoriesPlacesController@show');

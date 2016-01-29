@@ -8,7 +8,7 @@
 
     <div class="container-fluid">
         @foreach($cities as $city)
-            <li><a href="{{ URL::to('cities/' . $city->id) }}">{{ $city->name }} {{ $city->country }}</a></li>
+            <li><a href="{{ url($city->slug) }}">{{ $city->name }} {{ $city->country }}</a></li>
         @endforeach
     </div>
 

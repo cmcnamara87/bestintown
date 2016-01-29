@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'CitiesController@index');
+
 Route::resource('cities', 'CitiesController', ["only" => ["index", "show"]]);
 Route::resource('cities.categories', 'CitiesCategoriesController', ["only" => ["show"]]);
 Route::resource('cities.categories.places', 'CitiesCategoriesPlacesController', ["only" => ["show"]]);
@@ -179,5 +179,9 @@ Route::group(array('prefix' => 'api/v1'), function () {
         print_r($yelp->best('pizza', 'Brisbane, Australia'));
         echo "</pre>";
     });
-
 });
+
+
+Route::get('/', 'CitiesController@index');
+Route::get('/{cities}/{categories}', 'CitiesCategoriesController@show');
+Route::get('/{cities}/{categories}/{places}', 'CitiesCategoriesPlacesController@show');

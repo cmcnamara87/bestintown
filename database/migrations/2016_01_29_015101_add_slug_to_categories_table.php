@@ -20,7 +20,7 @@ class AddSlugToCategoriesTable extends Migration
 
         $categories = \App\Category::all();
         foreach($categories as $category) {
-            $category->resluggify();
+            $category->save();
         }
     }
 

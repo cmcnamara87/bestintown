@@ -20,7 +20,7 @@ class AddSlugToPlacesTable extends Migration
 
         $places = \App\Place::all();
         foreach($places as $place) {
-            $place->resluggify();
+            $place->save();
         }
     }
 

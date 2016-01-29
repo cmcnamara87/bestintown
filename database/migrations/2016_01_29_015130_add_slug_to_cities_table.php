@@ -20,7 +20,7 @@ class AddSlugToCitiesTable extends Migration
 
         $cities = \App\City::all();
         foreach($cities as $city) {
-            $city->resluggify();
+            $city->save();
         }
     }
 

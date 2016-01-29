@@ -14,7 +14,7 @@
                 @include('includes.category-list', ['city' => $city, 'categories' => $categories])
             </div>
             <div class="col-sm-4">
-                <p class="text-muted">
+                <p class="text-muted" style="margin-top:60px;">
                     <i class="fa fa-arrow-left"></i> Select a Category
                 </p>
             </div>

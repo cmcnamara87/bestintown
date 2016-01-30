@@ -66,6 +66,50 @@ Route::get('/nearby', function () {
 });
 
 Route::group(array('prefix' => 'api/v1'), function () {
+    Route::get('/cities', function() {
+        $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
+        $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);
+
+        // Check if a valid location
+        $radius = 25;
+
+        $city = \App\City::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
+            ->having('distance', '<', $radius)
+            ->orderby('distance', 'asc')
+            ->first();
+        if(!$city) {
+            abort(400, 'City not supported.');
+        }
+        return response()->json([$city]);
+    });
+
+    /**
+     * Search for a business in a city
+     */
+    Route::get('/search/{cities}/{term}', function($city, $term) {
+        $yelp = new \App\Yelp\Yelp();
+        $data = $yelp->search($term, "{$city->name} {$city->country}");
+        $response = json_decode($data);
+        $placeService = new \App\Places\PlaceService();
+
+        return array_map(function($business) use ($city, $placeService) {
+            if(!isset($business->location->coordinate)) {
+                return null;
+            }
+            $place = $placeService->createPlaceFromYelpBusiness($business, $city);
+            $place->load('ranks', 'ranks.category');
+            return $place;
+        }, $response->businesses);
+    });
+    Route::post('/rank', function() {
+        $data = \Illuminate\Support\Facades\Input::all();
+        $winner = Place::find($data['winner_id']);
+        $loser = Place::find($data['loser_id']);
+
+        $player1 = new Player($winner->score);
+        $player2 = new Player($loser->score);
+
+    });
     Route::post('/devices', function() {
         // Save the device
         $data = \Illuminate\Support\Facades\Input::all();

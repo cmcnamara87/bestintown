@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "75c5ecbe93b045243f53314bae06d9a4",
-    "content-hash": "1e8880734858010806aa615aa8713024",
+    "hash": "61fcb65d9b37f9f9ae028b5ac07b746f",
+    "content-hash": "09455d1aaebb8540bc0cd62648dab682",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1991,6 +1991,50 @@
             "time": "2015-05-30 15:59:26"
         },
         {
+            "name": "zelenin/elo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zelenin/elo.git",
+                "reference": "88aac22d7d4c83a337250d73089342f903543529"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zelenin/elo/zipball/88aac22d7d4c83a337250d73089342f903543529",
+                "reference": "88aac22d7d4c83a337250d73089342f903543529",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zelenin\\Elo\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Zelenin",
+                    "email": "aleksandr@zelenin.me",
+                    "homepage": "http://zelenin.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP implementation of Elo rating system",
+            "homepage": "https://github.com/zelenin/elo",
+            "keywords": [
+                "Rating",
+                "elo",
+                "ranking"
+            ],
+            "time": "2014-06-17 12:15:53"
+        },
+        {
             "name": "zendframework/zend-escaper",
             "version": "2.5.1",
             "source": {
@@ -3723,7 +3767,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "davibennun/laravel-push-notification": 20
+        "davibennun/laravel-push-notification": 20,
+        "zelenin/elo": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

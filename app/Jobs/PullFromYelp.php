@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Category;
 use App\Jobs\Job;
 use App\Place;
+use App\Places\PlaceService;
 use App\Rank;
 use App\City;
 use App\Yelp\Yelp;
@@ -14,14 +15,15 @@ use Illuminate\Support\Facades\Log;
 
 class PullFromYelp extends Job implements SelfHandling
 {
+    protected $placeService;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(PlaceService $placeService)
     {
-        //
+        $this->placeService = $placeService;
     }
 
     /**
@@ -65,49 +67,11 @@ class PullFromYelp extends Job implements SelfHandling
                     if(!isset($business->location->coordinate)) {
                         continue;
                     }
-
-                    Log::info('Business: ' . $business->name);
-                    $place = Place::where('name', '=', $business->name)->first();
-                    if(!$place) {
-                        $place = Place::create([
-                            'name' => $business->name,
-                            'image_url' => $this->getImageUrl($business),
-                            'external_url' => $business->mobile_url,
-                            'description' => $this->getDescription($business),
-                            'rating' => $business->rating,
-                            'latitude' => $business->location->coordinate->latitude,
-                            'longitude' => $business->location->coordinate->longitude,
-                            'address' => join(', ', $business->location->display_address),
-                            'city_id' => $city->id
-                        ]);
-                    }
-
-                    Rank::create([
-                        'category_id' => $category->id,
-                        'place_id' => $place->id,
-                        'rank' => $i + 1,
-                        'city_id' => $city->id
-                    ]);
+                    $place = $this->placeService->createPlaceFromYelpBusiness($business, $city);
+                    $this->placeService->setRankForPlace($place, $category, $i + 1, $city);
                 }
                 sleep(1);
             }
         }
-    }
-
-    function getDescription($business) {
-        if(isset($business->snippet_text)) {
-            return $business->snippet_text;
-        }
-        return null;
-    }
-
-    function getImageUrl($business) {
-        if(isset($business->image_url)) {
-            return $business->image_url;
-        }
-        if(isset($business->snippet_image_url)) {
-            return $business->snippet_image_url;
-        }
-        return null;
     }
 }

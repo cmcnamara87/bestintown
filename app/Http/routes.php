@@ -145,6 +145,9 @@ Route::group(array('prefix' => 'api/v1'), function () {
         $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
             ->having('distance', '<', $radius)
             ->orderby('distance', 'asc')
+            ->whereHas('ranks', function ($query) {
+                $query->where('rank', '>', 0);
+            })
             ->with('ranks', 'ranks.category')
             ->get();
 
@@ -209,7 +212,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
         $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
             ->orderby('distance', 'asc')
             ->whereHas('ranks', function ($query) use ($categoryId) {
-                $query->where('category_id', '=', $categoryId);
+                $query->where('category_id', '=', $categoryId)->where('rank', '>', 0);
             })
             ->where('city_id', '=', $city->id)
             ->with('ranks', 'ranks.category')

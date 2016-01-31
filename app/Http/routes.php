@@ -43,7 +43,8 @@ Route::get('/categories/{categoryId}', function ($categoryId) {
         //->having('distance', '<', $radius)
         ->orderby('distance', 'asc')
         ->whereHas('ranks', function ($query) use ($categoryId) {
-            $query->where('category_id', '=', $categoryId);
+            $query->where('category_id', '=', $categoryId)
+                ->where('rank', '>', 0);
         })
         ->with('ranks', 'ranks.category')
         ->get();
@@ -59,6 +60,9 @@ Route::get('/nearby', function () {
     $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
         ->having('distance', '<', $radius)
         ->orderby('distance', 'asc')
+        ->whereHas('ranks', function ($query) {
+            $query->where('rank', '>', 0);
+        })
         ->with('ranks', 'ranks.category')
         ->get();
 

@@ -31,7 +31,9 @@ class PlaceService {
                 'address' => join(', ', $business->location->display_address),
                 'city_id' => $city->id
             ]);
-
+            if(!isset($business->categories)) {
+                return $place;
+            }
             foreach($business->categories as $categoryData) {
                 $categoryName = $categoryData[0];
                 $categoryCode = $categoryData[1];

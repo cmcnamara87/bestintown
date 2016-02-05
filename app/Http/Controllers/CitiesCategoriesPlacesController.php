@@ -26,6 +26,7 @@ class CitiesCategoriesPlacesController extends Controller
 
         $ranks = Rank::where('category_id', '=', $category->id)
             ->where('city_id', $city->id)
+            ->where('rank', '>', 0)
             ->with('place', 'place.ranks', 'place.ranks.category')
             ->get();
 

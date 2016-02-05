@@ -70,6 +70,15 @@ Route::get('/nearby', function () {
 });
 
 Route::group(array('prefix' => 'api/v1'), function () {
+    Route::post('users', function () {
+        $data = \Illuminate\Support\Facades\Input::all();
+        $user = \App\User::create($data);
+        return response()->json($user);
+    });
+    Route::get('users/{id}', function ($id) {
+        $user = \App\User::find($id);
+        return response()->json($user, 200, [], JSON_NUMERIC_CHECK);
+    });
     Route::get('/cities', function() {
         $lat = \Illuminate\Support\Facades\Input::get('lat', -27.49611);
         $lon = \Illuminate\Support\Facades\Input::get('lon', 153.00207);

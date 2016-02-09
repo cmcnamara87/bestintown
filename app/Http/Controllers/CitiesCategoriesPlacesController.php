@@ -22,7 +22,11 @@ class CitiesCategoriesPlacesController extends Controller
     public function show($city, $category, $place)
     {
         $categoryIds = Rank::where('city_id', $city->id)->lists('category_id');
-        $categories = Category::whereIn('id', $categoryIds)->get();
+        $categories = Category::whereIn('id', $categoryIds)->with(['ranks' => function($query) use ($city)
+        {
+            $query->where('city_id', $city->id)
+                ->where('rank', '>', 0);
+        }])->get();
 
         $ranks = Rank::where('category_id', '=', $category->id)
             ->where('city_id', $city->id)

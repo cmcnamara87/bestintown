@@ -7,16 +7,35 @@
             in {{ $city->name }}</h1>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
 
+        <p class="lead" style="margin:30px 0;font-weight: normal;">
+            Find Top Ten lists for {{ $city->name }} in any of our categories, from Pizza to Accountants, its all here. Select a category below to get started.
+        </p>
+
+
+
+        <!-- Other categories -->
+        <?php $count = 0; ?>
         <div class="row">
-            <div class="col-sm-2">
-                @include('includes.category-list', ['city' => $city, 'categories' => $categories])
-            </div>
             <div class="col-sm-4">
-                <p class="text-muted" style="margin-top:60px;">
-                    <i class="fa fa-arrow-left"></i> Select a Category
-                </p>
+                @foreach ($categoriesByLetter as $letter => $categories)
+                    <?php $count += 1; ?>
+                    @if ($count % (count($categoriesByLetter) / 3) == 0)
+                        </div><div class="col-sm-4">
+                    @endif
+                    <h4>{{ $letter }}</h4>
+                    <ul class="list-unstyled" style="margin-bottom:30px;">
+                    @foreach($categories as $category)
+                    <li class="categories-list-item">
+                        <a href="{{ url("{$city->slug}/{$category->slug}") }}">
+                            {{ $category->name }}
+                            <span class="badge">{{ $category->ranks->where('city_id', $city->id)->count() }}</span>
+                        </a>
+                    </li>
+                    @endforeach
+                    </ul>
+                @endforeach
             </div>
         </div>
     </div>

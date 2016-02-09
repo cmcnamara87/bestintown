@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use App\Hotspot;
 use App\Jobs\PullFromYelp;
 use App\Place;
+use App\Places\PlaceService;
 use Illuminate\Console\Command;
+use Illuminate\Container\Container;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class PullFromYelpCommand extends Command
@@ -40,9 +42,9 @@ class PullFromYelpCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(PlaceService $placeService)
     {
-        $this->dispatch(new PullFromYelp());
+        $this->dispatch(new PullFromYelp($placeService));
     }
 
 }

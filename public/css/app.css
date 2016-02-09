@@ -8328,14 +8328,14 @@ button.close {
   margin: 10px;
 }
 
-.categories-list .categories-list-item a {
-  padding: 5px 0;
+.categories-list-item a {
+  padding: 10px 0;
   font-size: 14px;
   color: #6d7784;
   display: block;
 }
 
-.categories-list .categories-list-item .badge {
+.categories-list-item .badge {
   color: #c0c4ca;
   font-weight: normal;
   border: 1px solid #dbdee2;
@@ -8343,11 +8343,11 @@ button.close {
   font-size: 12px;
 }
 
-.categories-list .categories-list-item.active a {
+.categories-list-item.active a {
   color: #0087bf;
 }
 
-.categories-list .categories-list-item.active .badge {
+.categories-list-item.active .badge {
   background-color: #00abf2;
   color: white;
   border: none;

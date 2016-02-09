@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="jumbotron">
-        <h1 class="text-center">Best {{ $category->name }} Restaurants
+        <h1 class="text-center">Best {{ $category->name }}
             in {{ $city->name }}</h1>
     </div>
 

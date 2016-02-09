@@ -38,10 +38,8 @@ class PullFromYelp extends Job implements SelfHandling
         DB::table('ranks')->truncate();
         DB::table('places')->truncate();
         foreach($categoriesData as $categoryData) {
-            if(!isset($categoryData->parents) || !$categoryData->parents) {
-                continue;
-            }
-            if(!in_array("restaurants", $categoryData->parents)) {
+            // ignore all region locked categories
+            if(isset($categoryData->country_whitelist)) {
                 continue;
             }
             Category::create([

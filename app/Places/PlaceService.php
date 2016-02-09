@@ -56,7 +56,7 @@ class PlaceService {
     }
 
     public function setRankForPlace($place, $category, $rankNumber, $city) {
-        $rank = $category = Category::where('place_id', $place->id)
+        $rank = Rank::where('place_id', $place->id)
             ->where('category_id', $category->id)->first();
         if(!$rank) {
             return Rank::create([

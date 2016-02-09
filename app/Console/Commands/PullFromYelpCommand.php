@@ -9,6 +9,7 @@ use App\Places\PlaceService;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Support\Facades\Log;
 
 class PullFromYelpCommand extends Command
 {
@@ -44,6 +45,7 @@ class PullFromYelpCommand extends Command
      */
     public function handle(PlaceService $placeService)
     {
+        Log::useFiles('php://stdout');
         $this->dispatch(new PullFromYelp($placeService));
     }
 

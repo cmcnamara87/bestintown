@@ -34,7 +34,12 @@ class CitiesController extends Controller
     {
         // show all the categories for that city
         $categoryIds = Rank::where('city_id', $city->id)->lists('category_id');
-        $categories = Category::whereIn('id', $categoryIds)->get();
+        $categories = Category::whereIn('id', $categoryIds)->with(['ranks' => function($query) use ($city)
+        {
+            $query->where('city_id', $city->id)
+                ->where('rank', '>=', 0);
+
+        }])->get();
         // chunk the categories
         $categoriesByLetter = array_reduce($categories->all(), function($carry, $category) {
             $letter = substr($category->name, 0, 1);

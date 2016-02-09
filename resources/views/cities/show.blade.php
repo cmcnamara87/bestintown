@@ -10,10 +10,8 @@
     <div class="container">
 
         <p class="lead" style="margin:30px 0;font-weight: normal;">
-            Find Top Ten lists for {{ $city->name }} in any of our categories, from Pizza to Accountants, its all here. Select a category below to get started.
+            Find Top Ten lists for {{ $city->name }} in any category, from Pizza to Accountants, its all here. Select a category below to get started.
         </p>
-
-
 
         <!-- Other categories -->
         <?php $count = 0; ?>
@@ -30,7 +28,7 @@
                     <li class="categories-list-item">
                         <a href="{{ url("{$city->slug}/{$category->slug}") }}">
                             {{ $category->name }}
-                            <span class="badge">{{ $category->ranks->where('city_id', $city->id)->count() }}</span>
+                            <span class="badge">{{ $category->ranks->count() }}</span>
                         </a>
                     </li>
                     @endforeach

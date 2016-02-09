@@ -37,7 +37,7 @@ class CitiesController extends Controller
         $categories = Category::whereIn('id', $categoryIds)->with(['ranks' => function($query) use ($city)
         {
             $query->where('city_id', $city->id)
-                ->where('rank', '>=', 0);
+                ->where('rank', '>', 0);
 
         }])->get();
         // chunk the categories

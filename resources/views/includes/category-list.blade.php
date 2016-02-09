@@ -1,5 +1,5 @@
 <h4 class="text-muted text-uppercase">
-    <small>Best Restaurants in {{ $city->name }}</small>
+    <small>Categories</small>
 </h4>
 <ul class="list-unstyled categories-list">
 

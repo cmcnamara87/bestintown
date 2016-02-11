@@ -55,7 +55,7 @@ Route::get('/nearby', function () {
     // -27.49611, 153.00207 -> brisbane
     $lat = 48.842147;
     $lon = 2.321984;
-    $radius = 3;
+    $radius = 1;
 
     $places = \App\Place::select(DB::raw("*, (6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( $lon ) - radians(longitude) ) + sin( radians($lat) ) * sin( radians(latitude) ) )) AS distance"))
         ->having('distance', '<', $radius)

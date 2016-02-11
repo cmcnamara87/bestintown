@@ -26,6 +26,24 @@ class PullFromYelp extends Job implements SelfHandling
         $this->placeService = $placeService;
     }
 
+    function loadChildren($parents, $categoriesData) {
+        foreach($parents as $parent) {
+            $children = array_reduce($categoriesData, function($carry, $categoryData) use ($parent) {
+                if (!in_array($parent->code, $categoryData->parents)) {
+                    return $carry;
+                }
+                Log::info('Creating Category ' . $categoryData->title);
+                $carry[] = Category::create([
+                    'name' => $categoryData->title,
+                    'code' => $categoryData->alias,
+                    'parent_id' => $parent->id
+                ]);
+                return $carry;
+            }, []);
+            $this->loadChildren($children, $categoriesData);
+        }
+    }
+
     /**
      * Execute the job.
      *
@@ -37,16 +55,20 @@ class PullFromYelp extends Job implements SelfHandling
         DB::table('categories')->truncate();
         DB::table('ranks')->truncate();
         DB::table('places')->truncate();
-        foreach($categoriesData as $categoryData) {
-            // ignore all region locked categories
-            if(isset($categoryData->country_whitelist)) {
-                continue;
+
+        // make category tree
+        // get no roots
+        $roots = array_reduce($categoriesData, function($carry, $categoryData) {
+            if(!in_array(null, $categoryData->parents)) {
+                return $carry;
             }
-            Category::create([
+            $carry[] = Category::create([
                 'name' => $categoryData->title,
                 'code' => $categoryData->alias
             ]);
-        }
+            return $carry;
+        }, []);
+        $this->loadChildren($roots, $categoriesData);
 
         $allCities = City::all();
         foreach($allCities as $city) {

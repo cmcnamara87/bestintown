@@ -46,7 +46,9 @@ Route::get('/categories/{categoryId}', function ($categoryId) {
             $query->where('category_id', '=', $categoryId)
                 ->where('rank', '>', 0);
         })
-        ->with('ranks', 'ranks.category')
+        ->with(['ranks' => function($query) {
+            $query->where('rank', '>', 0);
+        }, 'ranks.category'])
         ->get();
 
     return view('categories.show', compact('category', 'places'));
@@ -63,7 +65,9 @@ Route::get('/nearby', function () {
         ->whereHas('ranks', function ($query) {
             $query->where('rank', '>', 0);
         })
-        ->with('ranks', 'ranks.category')
+        ->with(['ranks' => function($query) {
+            $query->where('rank', '>', 0);
+        }, 'ranks.category'])
         ->get();
 
     return view('places.index', compact('places'));

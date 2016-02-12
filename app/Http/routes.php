@@ -63,7 +63,7 @@ Route::get('/nearby', function () {
         ->having('distance', '<', $radius)
         ->orderby('distance', 'asc')
         ->whereHas('ranks', function ($query) {
-            $query->where('rank', '>', 0);
+            $query->where('rank', '>', 0)->where('rank', '<= ', 5);
         })
         ->with(['ranks' => function($query) {
             $query->where('rank', '>', 0);

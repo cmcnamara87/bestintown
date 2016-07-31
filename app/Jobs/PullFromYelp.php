@@ -63,7 +63,8 @@ class PullFromYelp extends Job implements SelfHandling
         $roots = array_reduce($categoriesData, function ($carry, $categoryData) {
             if (!in_array("restaurants", $categoryData->parents) &&
                 !in_array("food", $categoryData->parents) &&
-                $categoryData->alias !== 'localflavor'
+                $categoryData->alias !== 'localflavor' &&
+                $categoryData->alias !== 'landmarks'
             ) {
                 return $carry;
             }

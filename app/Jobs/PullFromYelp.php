@@ -61,17 +61,17 @@ class PullFromYelp extends Job implements SelfHandling
         // make category tree
         // get no roots
         $roots = array_reduce($categoriesData, function ($carry, $categoryData) {
-            if (!in_array("restaurants", $categoryData->parents) &&
-                !in_array("food", $categoryData->parents) &&
-                $categoryData->alias !== 'localflavor' &&
-                $categoryData->alias !== 'landmarks'
+            if (
+//                in_array("restaurants", $categoryData->parents) ||
+//                in_array("food", $categoryData->parents) ||
+                $categoryData->alias == 'localflavor' ||
+                $categoryData->alias == 'landmarks'
             ) {
-                return $carry;
+                $carry[] = Category::create([
+                    'name' => $categoryData->title,
+                    'code' => $categoryData->alias
+                ]);
             }
-            $carry[] = Category::create([
-                'name' => $categoryData->title,
-                'code' => $categoryData->alias
-            ]);
             return $carry;
         }, []);
         $this->loadChildren($roots, $categoriesData);

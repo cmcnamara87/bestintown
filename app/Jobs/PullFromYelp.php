@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 class PullFromYelp extends Job implements SelfHandling
 {
     protected $placeService;
+
     /**
      * Create a new job instance.
      *
@@ -26,9 +27,10 @@ class PullFromYelp extends Job implements SelfHandling
         $this->placeService = $placeService;
     }
 
-    function loadChildren($parents, $categoriesData) {
-        foreach($parents as $parent) {
-            $children = array_reduce($categoriesData, function($carry, $categoryData) use ($parent) {
+    function loadChildren($parents, $categoriesData)
+    {
+        foreach ($parents as $parent) {
+            $children = array_reduce($categoriesData, function ($carry, $categoryData) use ($parent) {
                 if (!in_array($parent->code, $categoryData->parents)) {
                     return $carry;
                 }
@@ -58,8 +60,10 @@ class PullFromYelp extends Job implements SelfHandling
 
         // make category tree
         // get no roots
-        $roots = array_reduce($categoriesData, function($carry, $categoryData) {
-            if(!in_array(null, $categoryData->parents)) {
+        $roots = array_reduce($categoriesData, function ($carry, $categoryData) {
+            if (!in_array("restaurants", $categoryData->parents) &&
+                !in_array("food", $categoryData->parents)
+            ) {
                 return $carry;
             }
             $carry[] = Category::create([
@@ -71,20 +75,20 @@ class PullFromYelp extends Job implements SelfHandling
         $this->loadChildren($roots, $categoriesData);
 
         $allCities = City::all();
-        foreach($allCities as $city) {
+        foreach ($allCities as $city) {
             Log::info('City: ' . $city->name);
 
             $allCategories = Category::all();
 
-            foreach($allCategories as $category) {
+            foreach ($allCategories as $category) {
                 $yelp = new Yelp();
                 Log::info('Category: ' . $category->code);
 
                 $businesses = $yelp->best($category->code, $city->name . ', ' . $city->country);
 
-                for($i = 0; $i < count($businesses); $i++) {
+                for ($i = 0; $i < count($businesses); $i++) {
                     $business = $businesses[$i];
-                    if(!isset($business->location->coordinate)) {
+                    if (!isset($business->location->coordinate)) {
                         continue;
                     }
                     $place = $this->placeService->createPlaceFromYelpBusiness($business, $city);

@@ -15,6 +15,13 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         \App\City::create([
+            'name' => 'London',
+            'country' => 'England',
+            'latitude' => 51.509865,
+            'longitude' => -0.118092
+        ]);
+
+        \App\City::create([
             'name' => 'Brisbane',
             'country' => 'Australia',
             'latitude' => -27.47101,
